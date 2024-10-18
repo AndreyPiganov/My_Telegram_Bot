@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+    tg_bot:
+        container_name: tg_bot
+        restart: always
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        depends_on:
+            - mongo
+        expose:
+            - '5015'
+        ports:
+            - '127.0.0.1:5015:5015'
+        volumes:
+            - ./:/app
+            - /app/node_modules
+        environment:
+            - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
